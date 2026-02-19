@@ -14,19 +14,17 @@ build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
-  run_exports :
+  run_exports:
     - {{ pin_subpackage(name, max_pin="x.x") }}
 
 requirements:
   host:
     - python >=3.9
     - setuptools
+    - setuptools-scm >=9.0.3
     - pip
   run:
     - python >=3.9
-    - numpy
-    - pandas
-    - matplotlib-base
     - tqdm
     - beartype
     - scanpy >=1.9
@@ -44,8 +42,10 @@ test:
     - python
 
 about:
-  home: https://pypi.org/project/peakqc/
-  summary: Module for quality control of ATAC-seq data
+  home: https://github.com/loosolab/PEAKQC
+  dev_url: https://github.com/loosolab/PEAKQC
+  doc_url: https://loosolab.pages.gwdg.de/software/peakqc/
+  summary: Quality control of single cell ATAC-seq data based on fragment length distributions.
   license: MIT
   license_file: LICENSE
 
