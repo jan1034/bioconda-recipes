@@ -1,4 +1,6 @@
+{% set name = "peakqc" %}
 {% set version = "0.1.3" %}
+{% set sha256 = "c7aa2c5d99058c92514f75b016ac51f27472844e7ddb3307666e17729b7f252c" %}
 
 package:
   name: peakqc
@@ -6,14 +8,14 @@ package:
 
 source:
   url: https://pypi.org/packages/source/p/peakqc/peakqc-{{ version }}.tar.gz
-  sha256: c7aa2c5d99058c92514f75b016ac51f27472844e7ddb3307666e17729b7f252c
+  sha256: {{ sha256 }}
 
 build:
   noarch: python
   script: {{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
   number: 0
   run_exports :
-    - {{ pin_subpackage("peakqc" , max_pin="x.x") }}
+    - {{ pin_subpackage({{ peakqc }} , max_pin="x.x") }}
 
 requirements:
   host:
@@ -36,6 +38,7 @@ test:
     - peakqc
   commands:
     - pip check
+    - python -c "import peakqc; print(peakqc.__version__)"
   requires:
     - pip
     - python
